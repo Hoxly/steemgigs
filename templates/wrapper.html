@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}{% endblock %} - AskSteem</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.hoxly.com/bootstrap/3/themes/paper/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <script src="https://use.fontawesome.com/c34f4a946e.js"></script>
+
+  <!-- Ubuntu Font -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+  <!-- Icon -->
+  <link rel="icon" href="https://i.imgur.com/EzjsWeh.png">
+
+  <style>
+  .container-4{
+    overflow: hidden;
+    width: 100%;
+    max-width: 512px;
+    margin-top: 5px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .container-4 input#search{
+    width: 100%;
+    height: 50px;
+    background: #f2f2f2;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #000000;
+    padding-left: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+  }
+  .container-4 input#search::-webkit-input-placeholder {
+     color: #65737e;
+  }
+
+  .container-4 input#search:-moz-placeholder { /* Firefox 18- */
+     color: #65737e;
+  }
+
+  .container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
+     color: #65737e;
+  }
+
+  .container-4 input#search:-ms-input-placeholder {
+     color: #65737e;
+  }
+  .container-4 button.icon{
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    border: none;
+    background: #f0f1f5;
+    height: 50px;
+    width: 50px;
+    color: #4f5b66;
+    opacity: 0;
+    font-size: 10pt;
+
+    -webkit-transition: all .55s ease;
+    -moz-transition: all .55s ease;
+    -ms-transition: all .55s ease;
+    -o-transition: all .55s ease;
+    transition: all .55s ease;
+  }
+  .container-4:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon{
+    outline: none;
+    opacity: 1;
+    margin-left: -50px;
+  }
+
+  .container-4:hover button.icon:hover{
+    background: white;
+  }
+  </style>
+
+  {% block head %}
+  <!-- for embeding custom head tags -->
+  {% endblock %}
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'index' %}" style="font-family: 'Ubuntu', sans-serif;">Steemgigs</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="navbar-left" style="width: 100%; max-width: 512px;">
+          <div class="container-4">
+            <form action="#" method="get">
+              <input type="search" name="q" id="search" placeholder="Search..." value="{{ request.GET.q }}" autocomplete="off" />
+              <button type="submit" class="icon"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          {% if request.session.is_logged_in %}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="https://accounts.asksteem.com/">Dashboard</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="https://accounts.asksteem.com/sso/logout">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li><a href="https://accounts.asksteem.com/sso/login?redirect=https://gigs.asksteem.com">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+  <div class="container">
+    {% block body %}
+    <!-- Put body contents here -->
+    {% endblock %}
+  </div>
+
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.hoxly.com/bootstrap/3/js/bootstrap.min.js"></script>
+
+  <!-- Google Analytics Code -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-78807002-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+  <!-- Search autocomplete -->
+  <script>
+  $( "#search" ).autocomplete({
+    minLength: 3,
+    source: ["Graphics & Design",
+"Logo Design",
+"Business Cards & Stationery",
+"Illustration",
+"Cartoons & Caricatures",
+"Flyers & Posters",
+"Book Covers & Packaging",
+"Web & Mobile Design",
+"Social Media Design",
+"Banner Ads",
+"Photoshop Editing",
+"3D & 2D Models",
+"T-Shirts",
+"Presentation Design",
+"Infographics",
+"Vector Tracing",
+"Invitations",
+"Digital Marketing",
+"Social Media Marketing",
+"SEO",
+"Web Traffic",
+"Content Marketing",
+"Video Marketing",
+"Email Marketing",
+"Search & Display Marketing",
+"Marketing Strategy",
+"Web Analytics",
+"Influencer Marketing",
+"Local Listings",
+"Domain Research",
+"E-Commerce Marketing",
+"Mobile Advertising",
+"Music Promotion",
+"Writing & Translation",
+"Resumes & Cover Letters",
+"Proofreading & Editing",
+"Translation",
+"Creative Writing",
+"Business Copywriting",
+"Research & Summaries",
+"Articles & Blog Posts",
+"Press Releases",
+"Transcription",
+"Legal Writing",
+"Video & Animation",
+"Whiteboard & Explainer Videos",
+"Intros & Animated Logos",
+"Promotional & Brand Videos",
+"Editing & Post Production",
+"Lyric & Music Videos",
+"Spokespersons & Testimonials",
+"Animated Characters & Modeling",
+"Music & Audio",
+"Voice Over",
+"Mixing & Mastering",
+"Producers & Composers",
+"Singer-Songwriters",
+"Session Musicians & Singers",
+"Jingles & Drops",
+"Sound Effects",
+"Programming & Tech",
+"WordPress",
+"Website Builders & CMS",
+"Web Programming",
+"Ecommerce",
+"Mobile Apps & Web",
+"Desktop applications",
+"Support & IT",
+"Data Analysis & Reports",
+"Convert Files",
+"Databases",
+"User Testing",
+"QA",
+"Chatbots",
+"Business",
+"Virtual Assistant",
+"Market Research",
+"Business Plans",
+"Branding Services",
+"Legal Consulting",
+"Financial Consulting",
+"Business Tips",
+"Presentations",
+"Career Advice",
+"Flyer Distribution",
+"Fun & Lifestyle",
+"Online Lessons",
+"Arts & Crafts",
+"Relationship Advice",
+"Health", "Nutrition & Fitness",
+"Astrology & Readings",
+"Spiritual & Healing",
+"Family & Genealogy",
+"Collectibles",
+"Greeting Cards & Videos",
+"Your Message On...",
+"Viral Videos",
+"Pranks & Stunts",
+"Celebrity Impersonators",
+"Gaming",
+"Global Culture"]
+  });
+  </script>
+
+  {% block scripts %}
+  <!-- Place page specific scripts here. -->
+  {% endblock %}
+</body>
+</html>
